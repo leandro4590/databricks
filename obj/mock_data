@@ -1,0 +1,20 @@
+from faker import Faker
+
+
+class MockData:
+
+    def __init__(self, region='pt_BR'):
+        self.fake = Faker(region)
+        self.region = region
+
+    def generate_customer(self, qtd):
+
+        return [
+            {
+                "cpf": self.fake.cpf().replace('.', '').replace('-', ''),
+                "name": self.fake.name(),
+                "address": self.fake.address(),
+                "email": self.fake.email()
+            }
+            for _ in range(qtd)
+        ]
