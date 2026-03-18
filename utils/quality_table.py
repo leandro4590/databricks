@@ -69,4 +69,13 @@ class TrataTabela:
 
         else:
             raise ValueError("Modo inválido. Use overwrite, append ou merge.")
+    
+    def optimize_column(self, *cols):
+
+        if cols:
+            spark.sql(f"""
+                OPTIMIZE {self.table} ZORDER BY ({",".join(cols)})
+            """)
+        else:
+            print("Não será aplicado optimize")
                 
